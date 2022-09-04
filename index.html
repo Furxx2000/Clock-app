@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Frontend Mentor | Clock App</title>
+    <script src="./index.js" defer></script>
+  </head>
+  <body>
+    <div class="filter"></div>
+    <main class="grid">
+      <article class="quote grid">
+        <div class="flex">
+          <q class="fs-12 fw-400 line-height-q"
+            >The science of operations, as derived from mathematics more
+            especially, is a science of itself, and has its own abstract truth
+            and value.</q
+          >
+          <div class="d-inline-block">
+            <svg class="icon-refresh svg">
+              <use xlink:href="./symbol-defs.svg#icon-refresh"></use>
+            </svg>
+          </div>
+        </div>
+        <h1 class="fs-12 fw-700">Ada Lovelace</h1>
+      </article>
+
+      <article class="locale-info flow">
+        <section>
+          <div class="flex">
+            <div class="d-inline-block">
+              <svg class="icon-sun svg">
+                <use xlink:href="./symbol-defs.svg#icon-sun"></use>
+              </svg>
+            </div>
+            <span class="letter-spacing-1 fs-15 uppercase">good morning</span>
+          </div>
+          <div>
+            <p class="locale-time fw-700 fs-100">
+              11:37<span class="fw-300 fs-15 uppercase">bst</span>
+            </p>
+          </div>
+          <p class="letter-spacing-1 uppercase fw-700 fs-15">in london, uk</p>
+        </section>
+        <div class="more-button flex">
+          <p class="text-black fs-12 fw-700 uppercase">more</p>
+          <button class="grid">
+            <div>
+              <svg class="icon-arrow-down svg">
+                <use xlink:href="./symbol-defs.svg#icon-arrow-down"></use>
+              </svg>
+            </div>
+          </button>
+        </div>
+      </article>
+    </main>
+    <div class="state-info grid">
+      <div class="fs-10 uppercase title">current timezone</div>
+      <div class="fs-20 fw-700 value">Europe/London</div>
+      <div class="fs-10 uppercase title">day of the year</div>
+      <div class="fs-20 fw-700 value">295</div>
+      <div class="fs-10 uppercase title">day of the week</div>
+      <div class="fs-20 fw-700 value">5</div>
+      <div class="fs-10 uppercase title">week number</div>
+      <div class="fs-20 fw-700 value">42</div>
+    </div>
+  </body>
+</html>

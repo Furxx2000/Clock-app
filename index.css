@@ -1,0 +1,280 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap");
+
+:root {
+  /* color */
+  --clr-white: 0 0% 100%;
+  --clr-dark-gray: 0 0% 19%;
+  --clr-black: 0 0% 0%;
+
+  /* font size*/
+  --fs-10: 10px;
+  --fs-12: 12px;
+  --fs-15: 15px;
+  --fs-20: 20px;
+  --fs-100: 100px;
+
+  /* font wight */
+  --fw-300: 300;
+  --fw-400: 400;
+  --fw-700: 700;
+
+  /* font family */
+  --fs-sans-inter: "Inter", sans-serif;
+
+  --line-height-quote: 22px;
+
+  --letter-spacing-3px: 3px;
+}
+
+*,
+*::after,
+*::before {
+  font-family: var(--fs-sans-inter);
+  box-sizing: border-box;
+  color: hsl(var(--clr-white));
+  font-weight: var(--fw-400);
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+picture {
+  margin: 0;
+}
+
+svg {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+body {
+  line-height: 1.4;
+  background-image: url(./assets/mobile/bg-image-daytime.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* Utility class */
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap, 1rem);
+}
+
+.flow > *:where(:not(:first-child)) {
+  margin-top: var(--flow, 1rem);
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* color */
+.bg-dark-gray {
+  background-color: hsl(var(--clr-dark-gray));
+}
+
+/* typography */
+.text-dark-gray {
+  color: hsl(var(--clr-dark-gray) / var(--alpha, 100%));
+}
+
+.text-black {
+  color: hsl(var(--clr-black) / var(--alpha, 100%));
+}
+
+.letter-spacing-1 {
+  letter-spacing: var(--letter-spacing-3px);
+}
+
+.fs-10 {
+  font-size: var(--fs-10);
+}
+.fs-12 {
+  font-size: var(--fs-12);
+}
+.fs-15 {
+  font-size: var(--fs-15);
+}
+.fs-20 {
+  font-size: var(--fs-20);
+}
+.fs-100 {
+  font-size: var(--fs-100);
+}
+
+.fw-300 {
+  font-weight: 300;
+}
+.fw-400 {
+  font-weight: 400;
+}
+.fw-700 {
+  font-weight: 700;
+}
+
+.line-height-q {
+  line-height: var(--line-height-quote);
+}
+
+/* ----------------------------------------------------------- */
+
+.filter {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: hsl(var(--clr-black));
+  mix-blend-mode: normal;
+  opacity: 0.4;
+  z-index: -1;
+}
+
+main {
+  min-height: 100vh;
+  align-content: space-between;
+  padding: 26px;
+  overflow: hidden;
+  transition: all 0.5s ease-out;
+}
+
+main.show {
+  translate: 0 -266px;
+}
+
+article .icon-refresh {
+  width: 17px;
+  height: 17px;
+  fill: hsl(var(--clr-white));
+  opacity: 0.5;
+}
+
+article .icon-refresh.fetch {
+  animation: fetch 1.5s infinite linear;
+}
+
+@keyframes fetch {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+article .icon-refresh:hover {
+  opacity: 1;
+}
+
+.locale-info {
+  --flow: 3rem;
+  padding-bottom: 14px;
+}
+
+.locale-info > section > * {
+  align-items: center;
+}
+
+.locale-info .icon-sun {
+  width: 24px;
+  height: 24px;
+  fill: hsl(var(--clr-white));
+}
+
+.more-button {
+  position: relative;
+  width: 115px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 28px;
+  background-color: hsl(var(--clr-white));
+  cursor: pointer;
+  transition: 0.1s linear;
+}
+
+.more-button > p {
+  letter-spacing: 3.75px;
+  --alpha: 50%;
+  transition: 0.1s linear;
+}
+
+.more-button > button {
+  position: absolute;
+  right: 4px;
+  place-items: center;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background-color: hsl(var(--clr-dark-gray));
+  transition: 0.1s linear;
+  cursor: pointer;
+}
+
+.more-button > button .icon-arrow-down {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: hsl(var(--clr-white));
+  stroke-width: 3;
+  transition: 0.3s linear;
+}
+
+.more-button > button .icon-arrow-down.show {
+  rotate: 180deg;
+  translate: 0 -2px;
+}
+
+.more-button:hover > button {
+  background-color: #999999;
+}
+
+.state-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 256px;
+  padding: 3rem 26px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  align-items: center;
+  background-color: hsl(var(--clr-white) / 75%);
+  backdrop-filter: blur(40.7742px);
+  opacity: 0;
+  translate: 0 256px;
+  transition: all 0.5s ease-out;
+}
+
+.state-info.show {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.state-info * {
+  color: hsl(var(--clr-dark-gray));
+}
+
+.state-info .title {
+  letter-spacing: 2px;
+}
+
+.state-info .value {
+  text-align: right;
+}
