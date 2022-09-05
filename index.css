@@ -158,14 +158,18 @@ main.show {
   translate: 0 -266px;
 }
 
-article .icon-refresh {
+.quote ~ * {
+  flex: 1;
+}
+
+.quote .icon-refresh {
   width: 17px;
   height: 17px;
   fill: hsl(var(--clr-white));
   opacity: 0.5;
 }
 
-article .icon-refresh.fetch {
+.quote .icon-refresh.fetch {
   animation: fetch 1.5s infinite linear;
 }
 
@@ -178,7 +182,7 @@ article .icon-refresh.fetch {
   }
 }
 
-article .icon-refresh:hover {
+.quote .icon-refresh:hover {
   opacity: 1;
 }
 
