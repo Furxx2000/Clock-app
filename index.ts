@@ -84,9 +84,5 @@ const init = async () => {
 
 init();
 
-// window.addEventListener("load", async () => {
-
-// });
-
 button.addEventListener("click", toggleStateInfo);
 iconRefresh.addEventListener("click", fetchNewQuote);
