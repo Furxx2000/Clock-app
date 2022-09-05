@@ -55,7 +55,7 @@ const getIpAddress = async () => {
 
 const getTimeInfo = async () => {
   try {
-    const url2 = `http://worldtimeapi.org/api/ip/${publicIpAddress}`;
+    const url2 = `https://worldtimeapi.org/api/ip/${publicIpAddress}`;
     const res2 = await fetch(url2);
     const data2 = await res2.json();
     const {
