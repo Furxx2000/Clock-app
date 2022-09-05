@@ -51,7 +51,7 @@ const getIpAddress = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 const getTimeInfo = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const url2 = `http://worldtimeapi.org/api/ip/${publicIpAddress}`;
+        const url2 = `https://worldtimeapi.org/api/ip/${publicIpAddress}`;
         const res2 = yield fetch(url2);
         const data2 = yield res2.json();
         const { abbreviation, day_of_week, day_of_year, timezone, week_number, datetime, } = data2;
@@ -70,7 +70,5 @@ const init = () => __awaiter(void 0, void 0, void 0, function* () {
     yield getTimeInfo();
 });
 init();
-// window.addEventListener("load", async () => {
-// });
 button.addEventListener("click", toggleStateInfo);
 iconRefresh.addEventListener("click", fetchNewQuote);
