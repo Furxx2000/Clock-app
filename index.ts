@@ -9,10 +9,13 @@ const iconArrowDown = document.querySelector(
 ) as HTMLOrSVGImageElement;
 const quoteElement = document.querySelector(".quote q") as HTMLQuoteElement;
 const authorElement = document.querySelector(".quote h1") as HTMLHeadingElement;
-const localTime = document.querySelector(
-  ".locale-time span"
-) as HTMLSpanElement;
-const stateInfoValue = stateInfo.querySelectorAll(".value") as NodeList;
+const localTime = document.querySelector(".locale-time") as HTMLSpanElement;
+const geoLocation = document.querySelector(
+  ".geolocation"
+) as HTMLParagraphElement;
+const greeting = document.querySelector(".greeting") as HTMLSpanElement;
+const greetingIcon = document.querySelector(".icon") as HTMLDivElement;
+const body = document.querySelector("body") as HTMLBodyElement;
 let publicIpAddress: string;
 
 const toggleStateInfo = () => {
@@ -46,6 +49,9 @@ const getIpAddress = async () => {
   try {
     const url = "https://api64.ipify.org?format=json";
     const res = await fetch(url);
+
+    if (!res.ok) throw new Error("Problem getting ip address");
+
     const data = await res.json();
     publicIpAddress = data.ip;
   } catch (e) {
@@ -55,9 +61,12 @@ const getIpAddress = async () => {
 
 const getTimeInfo = async () => {
   try {
-    const url2 = `https://worldtimeapi.org/api/ip/${publicIpAddress}`;
-    const res2 = await fetch(url2);
-    const data2 = await res2.json();
+    const url = `https://worldtimeapi.org/api/ip/${publicIpAddress}`;
+    const res = await fetch(url);
+
+    if (!res.ok) throw new Error("Problem getting time information");
+
+    const data = await res.json();
     const {
       abbreviation,
       day_of_week,
@@ -65,21 +74,78 @@ const getTimeInfo = async () => {
       timezone,
       week_number,
       datetime,
-    } = data2;
-    const arrayOfValue = [timezone, day_of_year, day_of_week, week_number];
+    } = data;
+    let currentHours: number | string = new Date(datetime).getHours();
+    const currentMins = new Date(datetime)
+      .getMinutes()
+      .toString()
+      .padStart(2, "0");
 
-    localTime.textContent = abbreviation;
-    stateInfoValue.forEach((value, index) => {
-      value.textContent = arrayOfValue[index];
-    });
+    if (currentHours >= 5 && currentHours < 12) {
+      greeting.textContent = "Good morning";
+      body.classList.add("day-time");
+    }
+    if (currentHours >= 12 && currentHours < 18) {
+      greeting.textContent = "Good afternoon";
+      body.classList.add("day-time");
+    }
+    if (currentHours >= 18 || currentHours < 5) {
+      greeting.textContent = "Good evening";
+      const greetingIconHTML = `<use xlink:href="./symbol-defs.svg#icon-moon"></use>`;
+      greetingIcon.innerHTML = "";
+      greetingIcon.insertAdjacentHTML("afterbegin", greetingIconHTML);
+
+      body.classList.add("night-time");
+      stateInfo.classList.add("night-time");
+    }
+    if (currentHours > 12) currentHours -= 12;
+
+    currentHours = currentHours.toString().padStart(2, "0");
+
+    const localTimeHtml = `
+    ${currentHours}:${currentMins}<span class="fw-300 fs-15 uppercase">${abbreviation}</span>`;
+
+    const timeInfoHtml = `
+    <div class="fs-10 uppercase title">current timezone</div>
+    <div class="fs-20 fw-700 value">${timezone}</div>
+    <div class="fs-10 uppercase title">day of the year</div>
+    <div class="fs-20 fw-700 value">${day_of_year}</div>
+    <div class="fs-10 uppercase title">day of the week</div>
+    <div class="fs-20 fw-700 value">${day_of_week}</div>
+    <div class="fs-10 uppercase title">week number</div>
+    <div class="fs-20 fw-700 value">${week_number}</div>`;
+
+    stateInfo.innerHTML = "";
+    localTime.innerHTML = "";
+    stateInfo.insertAdjacentHTML("afterbegin", timeInfoHtml);
+    localTime.insertAdjacentHTML("afterbegin", localTimeHtml);
   } catch (e) {
     console.error(`Get time information got ${e}`);
+  }
+};
+
+const getGeolocation = async () => {
+  try {
+    const url = `https://api.ipbase.com/v2/info?apikey=VNIDVTgYDEuG7pURjugeg3u7UzbhSpCSK7IGIDzT&ip=${publicIpAddress}`;
+    const res = await fetch(url);
+
+    if (!res.ok) throw new Error("Problem getting geolocation");
+
+    const data = await res.json();
+    const { city, country } = data.data.location;
+    const cityName = city.name.split(" ")[0];
+    const countryName = country.alpha2;
+
+    geoLocation.textContent = `in ${cityName}, ${countryName}`;
+  } catch (e) {
+    console.error(`Get geo location got ${e}`);
   }
 };
 
 const init = async () => {
   await getIpAddress();
   await getTimeInfo();
+  await getGeolocation();
 };
 
 init();
