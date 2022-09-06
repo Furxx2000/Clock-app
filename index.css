@@ -54,11 +54,36 @@ svg {
 
 body {
   line-height: 1.4;
-  background-image: url(./assets/mobile/bg-image-daytime.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   overflow: hidden;
+}
+
+body.day-time {
+  background-image: url(./assets/mobile/bg-image-daytime.jpg);
+}
+
+body.night-time {
+  background-image: url(./assets/mobile/bg-image-nighttime.jpg);
+}
+
+@media only screen and (min-width: 768px) {
+  body.day-time {
+    background-image: url(./assets/tablet/bg-image-daytime.jpg);
+  }
+  body.night-time {
+    background-image: url(./assets/tablet/bg-image-nighttime.jpg);
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  body.day-time {
+    background-image: url(./assets/desktop/bg-image-daytime.jpg);
+  }
+  body.night-time {
+    background-image: url(./assets/desktop/bg-image-nighttime.jpg);
+  }
 }
 
 /* Utility class */
@@ -195,7 +220,7 @@ main.show {
   align-items: center;
 }
 
-.locale-info .icon-sun {
+.locale-info .icon {
   width: 24px;
   height: 24px;
   fill: hsl(var(--clr-white));
@@ -273,6 +298,14 @@ main.show {
 
 .state-info * {
   color: hsl(var(--clr-dark-gray));
+}
+
+.state-info.night-time {
+  background-color: hsl(var(--clr-black) / 75%);
+}
+
+.state-info.night-time * {
+  color: hsl(var(--clr-white));
 }
 
 .state-info .title {
