@@ -14,6 +14,8 @@ const body = document.querySelector("body");
 let publicIpAddress;
 const toggleStateInfo = () => {
     [mainElement, stateInfo, iconArrowDown].forEach((el) => el.classList.toggle("show"));
+    const buttonText = button.querySelector("p");
+    buttonText.textContent = buttonText.textContent === "more" ? "less" : "more";
 };
 const fetchNewQuote = async () => {
     iconRefresh.classList.toggle("fetch");
@@ -74,8 +76,6 @@ const getTimeInfo = async () => {
             body.classList.add("night-time");
             stateInfo.classList.add("night-time");
         }
-        if (currentHours > 12)
-            currentHours -= 12;
         currentHours = currentHours.toString().padStart(2, "0");
         const localTimeHtml = `
     ${currentHours}:${currentMins}<span class="fw-300 fs-15 uppercase">${abbreviation}</span>`;
