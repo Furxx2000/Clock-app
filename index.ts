@@ -22,6 +22,8 @@ const toggleStateInfo = () => {
   [mainElement, stateInfo, iconArrowDown].forEach((el) =>
     el.classList.toggle("show")
   );
+  const buttonText = button.querySelector("p") as HTMLParagraphElement;
+  buttonText.textContent = buttonText.textContent === "more" ? "less" : "more";
 };
 
 const fetchNewQuote = async () => {
@@ -98,7 +100,6 @@ const getTimeInfo = async () => {
       body.classList.add("night-time");
       stateInfo.classList.add("night-time");
     }
-    if (currentHours > 12) currentHours -= 12;
 
     currentHours = currentHours.toString().padStart(2, "0");
 
