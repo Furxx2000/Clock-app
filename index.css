@@ -26,6 +26,20 @@
   --letter-spacing-3px: 3px;
 }
 
+@media only screen and (min-width: 768px) {
+  :root {
+    --fs-10: 13px;
+    --fs-12: 18px;
+    --fs-15: 18px;
+    --fs-20: 40px;
+    --fs-100: 175px;
+
+    --line-height-quote: 28px;
+
+    --letter-spacing-3px: 3.6px;
+  }
+}
+
 *,
 *::after,
 *::before {
@@ -155,6 +169,7 @@ body.night-time {
 
 .line-height-q {
   line-height: var(--line-height-quote);
+  flex: 1;
 }
 
 /* ----------------------------------------------------------- */
@@ -224,6 +239,10 @@ main.show {
   width: 24px;
   height: 24px;
   fill: hsl(var(--clr-white));
+}
+
+.hide-in-mobile {
+  display: none;
 }
 
 .more-button {
@@ -314,4 +333,64 @@ main.show {
 
 .state-info .value {
   text-align: right;
+}
+
+@media only screen and (min-width: 768px) {
+  main {
+    padding: 4rem;
+    padding-top: 5rem;
+    padding-right: 131px;
+  }
+
+  main.show {
+    translate: 0 -440px;
+  }
+
+  .quote .icon-refresh {
+    width: 24px;
+    height: 24px;
+  }
+
+  .hide-in-mobile {
+    display: inline;
+  }
+
+  .locale-time span {
+    font-size: 2rem;
+  }
+
+  .more-button {
+    width: 146px;
+    padding: 16px 20px;
+  }
+
+  .more-button > p {
+    letter-spacing: 5px;
+  }
+
+  .more-button > button {
+    right: 8px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .more-button > button .icon-arrow-down {
+    width: 16px;
+    height: 16px;
+  }
+
+  .state-info {
+    height: 440px;
+    translate: 0 440px;
+    padding-block: 119px;
+    padding-left: 4rem;
+    padding-right: 166px;
+    grid-template-rows: 1fr 1fr;
+    background-color: hsl(var(--clr-white) / 70%);
+    backdrop-filter: blur(25.7742px);
+  }
+
+  .state-info .title {
+    letter-spacing: 2.6px;
+  }
 }
