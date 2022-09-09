@@ -12,6 +12,10 @@ const greeting = document.querySelector(".greeting");
 const greetingIcon = document.querySelector(".icon");
 const body = document.querySelector("body");
 let publicIpAddress;
+const checkViewHeight = () => {
+    const vh = window.innerHeight.toString();
+    mainElement.style.minHeight = `${vh}px`;
+};
 const toggleStateInfo = () => {
     [mainElement, stateInfo, iconArrowDown].forEach((el) => el.classList.toggle("show"));
     const buttonText = button.querySelector("p");
@@ -56,7 +60,6 @@ const getTimeInfo = async () => {
         if (!res.ok)
             throw new Error("Problem getting time information");
         const data = await res.json();
-        console.log(data);
         const { abbreviation, day_of_week, day_of_year, timezone, week_number, datetime, } = data;
         let currentHours = new Date(datetime).getHours();
         const currentMins = new Date(datetime)
@@ -130,8 +133,9 @@ const getTimeInfo = async () => {
 const init = async () => {
     await getIpAddress();
     await getTimeInfo();
+    checkViewHeight();
     // await getGeolocation();
+    button.addEventListener("click", toggleStateInfo);
+    iconRefresh.addEventListener("click", fetchNewQuote);
 };
 init();
-button.addEventListener("click", toggleStateInfo);
-iconRefresh.addEventListener("click", fetchNewQuote);
