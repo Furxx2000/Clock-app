@@ -200,7 +200,7 @@ body.night-time {
 }
 
 main {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   align-content: space-between;
   padding: 26px;
   overflow: hidden;
@@ -209,6 +209,8 @@ main {
 
 main.show {
   translate: 0 -266px;
+  -webkit-translate: 0 -266px;
+  -moz-translate: 0 -266px;
 }
 
 .quote ~ * {
@@ -224,6 +226,8 @@ main.show {
 
 .quote .icon-refresh.fetch {
   animation: fetch 1.5s infinite linear;
+  -webkit-animation: fetch 1.5s infinite linear;
+  -moz-animation: fetch 1.5s infinite linear;
 }
 
 @keyframes fetch {
@@ -301,7 +305,11 @@ main.show {
 
 .more-button > button .icon-arrow-down.show {
   rotate: 180deg;
+  -webkit-rotate: 180deg;
+  -moz-rotate: 180deg;
   translate: 0 -2px;
+  -webkit-translate: 0 -2px;
+  -moz-translate: 0 -2px;
 }
 
 .more-button:hover > button {
@@ -327,6 +335,8 @@ main.show {
 .state-info.show {
   opacity: 1;
   translate: 0 0;
+  -webkit-translate: 0 0;
+  -moz-translate: 0 0;
 }
 
 .state-info * {
@@ -364,6 +374,8 @@ main.show {
 
   main.show {
     translate: 0 -440px;
+    -webkit-translate: 0 -440px;
+    -moz-translate: 0 -440px;
   }
 
   .quote .icon-refresh {
@@ -404,6 +416,8 @@ main.show {
     row-gap: 3rem;
     height: 440px;
     translate: 0 440px;
+    -webkit-translate: 0 440px;
+    -moz-translate: 0 440px;
     padding-block: 119px;
     padding-left: 4rem;
     padding-right: 166px;
@@ -429,6 +443,8 @@ main.show {
 
   main.show {
     translate: 0 -42vh;
+    -webkit-translate: 0 -42vh;
+    -moz-translate: 0 -42vh;
   }
 
   .quote {
@@ -453,6 +469,8 @@ main.show {
   .state-info {
     height: 50vh;
     translate: 0 50vh;
+    -webkit-translate: 0 50vh;
+    -moz-translate: 0 50vh;
     padding-block: 74px;
     padding-left: 11.3vw;
     padding-right: 30vw;
