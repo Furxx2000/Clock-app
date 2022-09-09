@@ -40,6 +40,19 @@
   }
 }
 
+@media only screen and (min-width: 1440px) {
+  :root {
+    --fs-10: 15px;
+    --fs-15: 20px;
+    --fs-20: 56px;
+    --fs-100: 200px;
+
+    --line-height-quote: 28px;
+
+    --letter-spacing-3px: 4px;
+  }
+}
+
 *,
 *::after,
 *::before {
@@ -248,6 +261,7 @@ main.show {
 .more-button {
   position: relative;
   width: 115px;
+  max-height: 56px;
   align-items: center;
   padding: 12px 16px;
   border-radius: 28px;
@@ -317,6 +331,8 @@ main.show {
 
 .state-info * {
   color: hsl(var(--clr-dark-gray));
+  justify-content: space-between;
+  align-items: center;
 }
 
 .state-info.night-time {
@@ -335,6 +351,10 @@ main.show {
   text-align: right;
 }
 
+.state-info .divider {
+  display: none;
+}
+
 @media only screen and (min-width: 768px) {
   main {
     padding: 4rem;
@@ -347,8 +367,8 @@ main.show {
   }
 
   .quote .icon-refresh {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 
   .hide-in-mobile {
@@ -380,17 +400,79 @@ main.show {
   }
 
   .state-info {
+    column-gap: 5rem;
+    row-gap: 3rem;
     height: 440px;
     translate: 0 440px;
     padding-block: 119px;
     padding-left: 4rem;
     padding-right: 166px;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
     background-color: hsl(var(--clr-white) / 70%);
     backdrop-filter: blur(25.7742px);
   }
 
+  .state-info * {
+    --gap: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  main {
+    padding-top: 7vh;
+    padding-inline: 11.4vw;
+    padding-bottom: 10vh;
+  }
+
+  main.show {
+    translate: 0 -42vh;
+  }
+
+  .quote {
+    max-width: 575px;
+  }
+
+  .locale-info {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .locale-time span {
+    font-size: 40px;
+  }
+
+  .geo-location {
+    font-size: 24px;
+    letter-spacing: 4.8px;
+  }
+
+  .state-info {
+    height: 50vh;
+    translate: 0 50vh;
+    padding-block: 74px;
+    padding-left: 11.3vw;
+    padding-right: 30vw;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   .state-info .title {
-    letter-spacing: 2.6px;
+    letter-spacing: 3px;
+  }
+
+  .state-info * {
+    --gap: 0.5rem;
+  }
+
+  .state-info .divider {
+    display: block;
+    justify-self: center;
+    width: 1px;
+    height: 100%;
+    background-color: #303030;
+    opacity: 0.25;
+    grid-area: 1 / 2 / 3;
   }
 }
