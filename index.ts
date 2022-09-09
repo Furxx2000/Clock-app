@@ -18,6 +18,11 @@ const greetingIcon = document.querySelector(".icon") as HTMLDivElement;
 const body = document.querySelector("body") as HTMLBodyElement;
 let publicIpAddress: string;
 
+const checkViewHeight = () => {
+  const vh = window.innerHeight.toString();
+  mainElement.style.minHeight = `${vh}px`;
+};
+
 const toggleStateInfo = () => {
   [mainElement, stateInfo, iconArrowDown].forEach((el) =>
     el.classList.toggle("show")
@@ -71,7 +76,6 @@ const getTimeInfo = async () => {
     if (!res.ok) throw new Error("Problem getting time information");
 
     const data = await res.json();
-    console.log(data);
     const {
       abbreviation,
       day_of_week,
@@ -163,10 +167,10 @@ const getTimeInfo = async () => {
 const init = async () => {
   await getIpAddress();
   await getTimeInfo();
+  checkViewHeight();
   // await getGeolocation();
+  button.addEventListener("click", toggleStateInfo);
+  iconRefresh.addEventListener("click", fetchNewQuote);
 };
 
 init();
-
-button.addEventListener("click", toggleStateInfo);
-iconRefresh.addEventListener("click", fetchNewQuote);
