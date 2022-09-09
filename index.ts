@@ -42,6 +42,7 @@ const fetchNewQuote = async () => {
     authorElement.textContent = author;
   } catch (e) {
     console.error(`Fetch new quote got ${e}`);
+    throw e;
   }
 
   iconRefresh.classList.toggle("fetch");
@@ -58,6 +59,7 @@ const getIpAddress = async () => {
     publicIpAddress = data.ip;
   } catch (e) {
     console.error(`Get ip address got ${e}`);
+    throw e;
   }
 };
 
@@ -69,6 +71,7 @@ const getTimeInfo = async () => {
     if (!res.ok) throw new Error("Problem getting time information");
 
     const data = await res.json();
+    console.log(data);
     const {
       abbreviation,
       day_of_week,
@@ -107,46 +110,60 @@ const getTimeInfo = async () => {
     ${currentHours}:${currentMins}<span class="fw-300 fs-15 uppercase">${abbreviation}</span>`;
 
     const timeInfoHtml = `
-    <div class="fs-10 uppercase title">current timezone</div>
-    <div class="fs-20 fw-700 value">${timezone}</div>
-    <div class="fs-10 uppercase title">day of the year</div>
-    <div class="fs-20 fw-700 value">${day_of_year}</div>
-    <div class="fs-10 uppercase title">day of the week</div>
-    <div class="fs-20 fw-700 value">${day_of_week}</div>
-    <div class="fs-10 uppercase title">week number</div>
-    <div class="fs-20 fw-700 value">${week_number}</div>`;
+    <div class="flex">
+      <span class="fs-10 uppercase title">current timezone</span>
+      <span class="fs-20 fw-700 value">${timezone}</span>
+    </div>
+    <div class="flex">
+      <span class="fs-10 uppercase title">day of the year</span>
+      <span class="fs-20 fw-700 value">${day_of_year}</span>
+    </div>
+    <div class="flex divider"></div>
+    <div class="flex">
+      <span class="fs-10 uppercase title">day of the week</span>
+      <span class="fs-20 fw-700 value">${day_of_week}</span>
+    </div>
+    <div class="flex">
+      <span class="fs-10 uppercase title">week number</span>
+      <span class="fs-20 fw-700 value">${week_number}</span>
+    </div>`;
 
     stateInfo.innerHTML = "";
     localTime.innerHTML = "";
     stateInfo.insertAdjacentHTML("afterbegin", timeInfoHtml);
     localTime.insertAdjacentHTML("afterbegin", localTimeHtml);
+
+    const cityName = timezone.split("/")[1];
+    geoLocation.textContent = `in ${cityName}, TW`;
   } catch (e) {
     console.error(`Get time information got ${e}`);
+    throw e;
   }
 };
 
-const getGeolocation = async () => {
-  try {
-    const url = `https://api.ipbase.com/v2/info?apikey=VNIDVTgYDEuG7pURjugeg3u7UzbhSpCSK7IGIDzT&ip=${publicIpAddress}`;
-    const res = await fetch(url);
+// const getGeolocation = async () => {
+//   try {
+//     const url = `https://api.ipbase.com/v2/info?apikey=VNIDVTgYDEuG7pURjugeg3u7UzbhSpCSK7IGIDzT&ip=${publicIpAddress}`;
+//     const res = await fetch(url);
 
-    if (!res.ok) throw new Error("Problem getting geolocation");
+//     if (!res.ok) throw new Error("Problem getting geolocation");
 
-    const data = await res.json();
-    const { city, country } = data.data.location;
-    const cityName = city.name.split(" ")[0];
-    const countryName = country.alpha2;
+//     const data = await res.json();
+//     const { city, country } = data.data.location;
+//     const cityName = city.name.split(" ")[0];
+//     const countryName = country.alpha2;
 
-    geoLocation.textContent = `in ${cityName}, ${countryName}`;
-  } catch (e) {
-    console.error(`Get geo location got ${e}`);
-  }
-};
+//     geoLocation.textContent = `in ${cityName}, ${countryName}`;
+//   } catch (e) {
+//     console.error(`Get geo location got ${e}`);
+//     throw e;
+//   }
+// };
 
 const init = async () => {
   await getIpAddress();
   await getTimeInfo();
-  await getGeolocation();
+  // await getGeolocation();
 };
 
 init();
