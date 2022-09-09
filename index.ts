@@ -165,9 +165,9 @@ const getTimeInfo = async () => {
 // };
 
 const init = async () => {
+  checkViewHeight();
   await getIpAddress();
   await getTimeInfo();
-  checkViewHeight();
   // await getGeolocation();
   button.addEventListener("click", toggleStateInfo);
   iconRefresh.addEventListener("click", fetchNewQuote);
