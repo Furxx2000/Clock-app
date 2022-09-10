@@ -230,9 +230,13 @@ main.show {
 
 @keyframes fetch {
   0% {
+    -webkit-rotate: 0deg;
+    -moz-rotate: 0deg;
     rotate: 0deg;
   }
   100% {
+    -webkit-rotate: 360deg;
+    -moz-rotate: 360deg;
     rotate: 360deg;
   }
 }
