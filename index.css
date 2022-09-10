@@ -223,6 +223,8 @@ main.show {
 }
 
 .quote .icon-refresh.fetch {
+  -webkit-animation: fetch 1.5s infinite linear;
+  -moz-animation: fetch 1.5s infinite linear;
   animation: fetch 1.5s infinite linear;
 }
 
