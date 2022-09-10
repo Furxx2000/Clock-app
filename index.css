@@ -229,15 +229,29 @@ main.show {
   animation: fetch 1.5s infinite linear;
 }
 
-@keyframes fetch {
+@-webkit-keyframes fetch {
   0% {
-    -webkit-rotate: 0deg;
-    -moz-rotate: 0deg;
     rotate: 0deg;
   }
   100% {
-    -webkit-rotate: 360deg;
-    -moz-rotate: 360deg;
+    rotate: 360deg;
+  }
+}
+
+@-moz-keyframes fetch {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@keyframes fetch {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
     rotate: 360deg;
   }
 }
