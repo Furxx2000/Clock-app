@@ -80,7 +80,6 @@ svg {
 }
 
 body {
-  min-height: 100vh;
   line-height: 1.4;
   background-repeat: no-repeat;
   background-position: center;
@@ -201,6 +200,7 @@ body.night-time {
 }
 
 main {
+  min-height: -webkit-fill-available;
   min-height: 100vh;
   align-content: space-between;
   padding: 26px;
