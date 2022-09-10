@@ -18,9 +18,17 @@ const greetingIcon = document.querySelector(".icon") as HTMLDivElement;
 const body = document.querySelector("body") as HTMLBodyElement;
 let publicIpAddress: string;
 
+const setMainElementHeight = (vh: number) => {
+  mainElement.style.setProperty("--vh", `${vh}px`);
+};
+
 const checkViewHeight = () => {
-  const vh = window.innerHeight.toString();
-  mainElement.style.minHeight = `${vh}px`;
+  let windowsVH = window.innerHeight / 100;
+  setMainElementHeight(windowsVH);
+
+  window.addEventListener("resize", () => {
+    setMainElementHeight(windowsVH);
+  });
 };
 
 const toggleStateInfo = () => {
@@ -165,7 +173,7 @@ const getTimeInfo = async () => {
 // };
 
 const init = async () => {
-  // checkViewHeight();
+  checkViewHeight();
   await getIpAddress();
   await getTimeInfo();
   // await getGeolocation();

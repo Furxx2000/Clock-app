@@ -12,9 +12,15 @@ const greeting = document.querySelector(".greeting");
 const greetingIcon = document.querySelector(".icon");
 const body = document.querySelector("body");
 let publicIpAddress;
+const setMainElementHeight = (vh) => {
+    mainElement.style.setProperty("--vh", `${vh}px`);
+};
 const checkViewHeight = () => {
-    const vh = window.innerHeight.toString();
-    mainElement.style.minHeight = `${vh}px`;
+    let windowsVH = window.innerHeight / 100;
+    setMainElementHeight(windowsVH);
+    window.addEventListener("resize", () => {
+        setMainElementHeight(windowsVH);
+    });
 };
 const toggleStateInfo = () => {
     [mainElement, stateInfo, iconArrowDown].forEach((el) => el.classList.toggle("show"));
@@ -131,7 +137,7 @@ const getTimeInfo = async () => {
 //   }
 // };
 const init = async () => {
-    // checkViewHeight();
+    checkViewHeight();
     await getIpAddress();
     await getTimeInfo();
     // await getGeolocation();
