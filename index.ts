@@ -18,16 +18,16 @@ const greetingIcon = document.querySelector(".icon") as HTMLDivElement;
 const body = document.querySelector("body") as HTMLBodyElement;
 let publicIpAddress: string;
 
-const setMainElementHeight = (vh: number) => {
-  mainElement.style.setProperty("--vh", `${vh}px`);
+const setMainElementHeight = () => {
+  let windowsVH = window.innerHeight / 100;
+  mainElement.style.setProperty("--vh", `${windowsVH}px`);
 };
 
 const checkViewHeight = () => {
-  let windowsVH = window.innerHeight / 100;
-  setMainElementHeight(windowsVH);
+  setMainElementHeight();
 
   window.addEventListener("resize", () => {
-    setMainElementHeight(windowsVH);
+    setMainElementHeight();
   });
 };
 

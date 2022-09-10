@@ -12,14 +12,14 @@ const greeting = document.querySelector(".greeting");
 const greetingIcon = document.querySelector(".icon");
 const body = document.querySelector("body");
 let publicIpAddress;
-const setMainElementHeight = (vh) => {
-    mainElement.style.setProperty("--vh", `${vh}px`);
+const setMainElementHeight = () => {
+    let windowsVH = window.innerHeight / 100;
+    mainElement.style.setProperty("--vh", `${windowsVH}px`);
 };
 const checkViewHeight = () => {
-    let windowsVH = window.innerHeight / 100;
-    setMainElementHeight(windowsVH);
+    setMainElementHeight();
     window.addEventListener("resize", () => {
-        setMainElementHeight(windowsVH);
+        setMainElementHeight();
     });
 };
 const toggleStateInfo = () => {
