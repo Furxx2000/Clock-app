@@ -1,3 +1,13 @@
+import { QUOTE_URL, IP_ADDRESS_URL, WORLD_TIME_API_URL } from "./config.js";
+import {
+  AJAX,
+  setMainElementHeight,
+  renderLocalTimeTemplate,
+  renderStateInfoTemplate,
+  renderGeoLocationTemplate,
+  renderMoonIconTemplate,
+} from "./helper.js";
+
 const mainElement = document.querySelector("main") as HTMLElement;
 const stateInfo = document.querySelector(".state-info") as HTMLDivElement;
 const button = document.querySelector(".more-button") as HTMLButtonElement;
@@ -18,19 +28,15 @@ const greetingIcon = document.querySelector(".icon") as HTMLDivElement;
 const body = document.querySelector("body") as HTMLBodyElement;
 let publicIpAddress: string;
 
-const setMainElementHeight = () => {
-  let windowsVH = window.innerHeight / 100;
-  mainElement.style.setProperty("--vh", `${windowsVH}px`);
-};
-
 const checkViewHeight = () => {
-  setMainElementHeight();
+  setMainElementHeight(mainElement);
 
   window.addEventListener("resize", () => {
-    setMainElementHeight();
+    setMainElementHeight(mainElement);
   });
 };
 
+// Press more button and toggle all the elements
 const toggleStateInfo = () => {
   [mainElement, stateInfo, iconArrowDown].forEach((el) =>
     el.classList.toggle("show")
@@ -43,47 +49,32 @@ const fetchNewQuote = async () => {
   iconRefresh.classList.toggle("fetch");
 
   try {
-    const url = "https://programming-quotes-api.herokuapp.com/Quotes/random";
-    const res = await fetch(url);
-
-    if (!res.ok) throw new Error("Problem getting new quote");
-
-    const data = await res.json();
+    const data = await AJAX(QUOTE_URL);
     const { author, en } = data;
 
     quoteElement.textContent = en;
     authorElement.textContent = author;
+    iconRefresh.classList.toggle("fetch");
   } catch (e) {
-    console.error(`Fetch new quote got ${e}`);
     throw e;
   }
-
-  iconRefresh.classList.toggle("fetch");
 };
 
 const getIpAddress = async () => {
   try {
-    const url = "https://api64.ipify.org?format=json";
-    const res = await fetch(url);
+    const data = await AJAX(IP_ADDRESS_URL);
+    const { ip } = data;
 
-    if (!res.ok) throw new Error("Problem getting ip address");
-
-    const data = await res.json();
-    publicIpAddress = data.ip;
+    publicIpAddress = ip;
   } catch (e) {
-    console.error(`Get ip address got ${e}`);
     throw e;
   }
 };
 
 const getTimeInfo = async () => {
   try {
-    const url = `https://worldtimeapi.org/api/ip/${publicIpAddress}`;
-    const res = await fetch(url);
+    const data = await AJAX(`${WORLD_TIME_API_URL}${publicIpAddress}`);
 
-    if (!res.ok) throw new Error("Problem getting time information");
-
-    const data = await res.json();
     const {
       abbreviation,
       day_of_week,
@@ -97,7 +88,9 @@ const getTimeInfo = async () => {
       .getMinutes()
       .toString()
       .padStart(2, "0");
+    const cityName = timezone.split("/")[1];
 
+    // Check time of the day
     if (currentHours >= 5 && currentHours < 12) {
       greeting.textContent = "Good morning";
       body.classList.add("day-time");
@@ -108,47 +101,31 @@ const getTimeInfo = async () => {
     }
     if (currentHours >= 18 || currentHours < 5) {
       greeting.textContent = "Good evening";
-      const greetingIconHTML = `<use xlink:href="./symbol-defs.svg#icon-moon"></use>`;
-      greetingIcon.innerHTML = "";
-      greetingIcon.insertAdjacentHTML("afterbegin", greetingIconHTML);
+
+      // Render moon icon
+      renderMoonIconTemplate(greetingIcon);
 
       body.classList.add("night-time");
       stateInfo.classList.add("night-time");
     }
 
+    // Turn hours type to string
     currentHours = currentHours.toString().padStart(2, "0");
 
-    const localTimeHtml = `
-    ${currentHours}:${currentMins}<span class="fw-300 fs-15 uppercase">${abbreviation}</span>`;
+    // Render Local time
+    renderLocalTimeTemplate(localTime, currentHours, currentMins, abbreviation);
 
-    const timeInfoHtml = `
-    <div class="flex">
-      <span class="fs-10 uppercase title">current timezone</span>
-      <span class="fs-20 fw-700 value">${timezone}</span>
-    </div>
-    <div class="flex">
-      <span class="fs-10 uppercase title">day of the year</span>
-      <span class="fs-20 fw-700 value">${day_of_year}</span>
-    </div>
-    <div class="flex divider"></div>
-    <div class="flex">
-      <span class="fs-10 uppercase title">day of the week</span>
-      <span class="fs-20 fw-700 value">${day_of_week}</span>
-    </div>
-    <div class="flex">
-      <span class="fs-10 uppercase title">week number</span>
-      <span class="fs-20 fw-700 value">${week_number}</span>
-    </div>`;
-
-    stateInfo.innerHTML = "";
-    localTime.innerHTML = "";
-    stateInfo.insertAdjacentHTML("afterbegin", timeInfoHtml);
-    localTime.insertAdjacentHTML("afterbegin", localTimeHtml);
-
-    const cityName = timezone.split("/")[1];
-    geoLocation.textContent = `in ${cityName}, TW`;
+    // Render expand information
+    renderStateInfoTemplate(
+      stateInfo,
+      timezone,
+      day_of_year,
+      day_of_week,
+      week_number
+    );
+    // Render geolocation text
+    renderGeoLocationTemplate(geoLocation, cityName);
   } catch (e) {
-    console.error(`Get time information got ${e}`);
     throw e;
   }
 };
