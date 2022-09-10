@@ -156,6 +156,9 @@ const init = async () => {
   // await getGeolocation();
   button.addEventListener("click", toggleStateInfo);
   iconRefresh.addEventListener("click", fetchNewQuote);
+  setTimeout(() => {
+    stateInfo.classList.remove("hide");
+  }, 3000);
 };
 
 init();
