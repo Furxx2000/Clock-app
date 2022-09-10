@@ -14,7 +14,7 @@ const greetingIcon = document.querySelector(".icon");
 const body = document.querySelector("body");
 let publicIpAddress;
 const checkViewHeight = () => {
-    setMainElementHeight(mainElement);
+    // setMainElementHeight(mainElement);
     window.addEventListener("resize", () => {
         setMainElementHeight(mainElement);
     });

@@ -29,7 +29,7 @@ const body = document.querySelector("body") as HTMLBodyElement;
 let publicIpAddress: string;
 
 const checkViewHeight = () => {
-  setMainElementHeight(mainElement);
+  // setMainElementHeight(mainElement);
 
   window.addEventListener("resize", () => {
     setMainElementHeight(mainElement);
