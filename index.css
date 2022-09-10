@@ -201,7 +201,7 @@ body.night-time {
 }
 
 main {
-  /* min-height: 100vh; */
+  min-height: 100vh;
   align-content: space-between;
   padding: 26px;
   overflow: hidden;
