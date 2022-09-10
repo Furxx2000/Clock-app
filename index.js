@@ -131,7 +131,7 @@ const getTimeInfo = async () => {
 //   }
 // };
 const init = async () => {
-    checkViewHeight();
+    // checkViewHeight();
     await getIpAddress();
     await getTimeInfo();
     // await getGeolocation();
