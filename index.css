@@ -130,6 +130,7 @@ body.night-time {
 
 .d-inline-block {
   display: inline-block;
+  padding-top: 5px;
 }
 
 .uppercase {
@@ -466,7 +467,7 @@ main.show {
     font-size: 40px;
   }
 
-  .geo-location {
+  .geolocation {
     font-size: 24px;
     letter-spacing: 4.8px;
   }
