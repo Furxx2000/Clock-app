@@ -32,20 +32,20 @@ export const renderStateInfoTemplate = (
   weekNumber: string
 ) => {
   const html = `
-    <div class="flex">
+    <div class="flex" role='contentinfo'>
       <span class="fs-10 uppercase title">current timezone</span>
       <span class="fs-20 fw-700 value">${timeZone}</span>
     </div>
-    <div class="flex">
+    <div class="flex" role='contentinfo'>
       <span class="fs-10 uppercase title">day of the year</span>
       <span class="fs-20 fw-700 value">${dayOfTheYear}</span>
     </div>
     <div class="flex divider"></div>
-    <div class="flex">
+    <div class="flex" role='contentinfo'>
       <span class="fs-10 uppercase title">day of the week</span>
       <span class="fs-20 fw-700 value">${dayOfTheWeek}</span>
     </div>
-    <div class="flex">
+    <div class="flex" role='contentinfo'>
       <span class="fs-10 uppercase title">week number</span>
       <span class="fs-20 fw-700 value">${weekNumber}</span>
     </div>`;
